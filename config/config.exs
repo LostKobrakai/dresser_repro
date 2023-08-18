@@ -10,6 +10,17 @@ import Config
 config :dresser_repro,
   ecto_repos: [DresserRepro.Repo]
 
+# Configure your database
+config :dresser_repro, DresserRepro.Repo,
+  database: Path.join(["_build", "#{config_env()}", "db.sqlite3"]),
+  migration_primary_key: [column: :id, type: :binary_id],
+  migration_foreign_key: [column: :id, type: :binary_id],
+  migration_timestamps: [type: :utc_datetime_usec]
+
+config :ecto_sqlite3,
+  binary_id_type: :binary,
+  uuid_type: :binary
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
